@@ -8,12 +8,12 @@ import cv2
 
 # construct agrument parser and parse the argument
 ap = argparse.ArgumentParser()
-ap.add_argument("-c", "--cascade", required = True,
-    help = "path to where the face cascade resides")
-ap.add_argument("-m", "--model", required = True,
-    help = "path to pre-trained smile detector CNN")
+ap.add_argument("-c", "--cascade", required=True,
+                help="path to where the face cascade resides")
+ap.add_argument("-m", "--model", required=True,
+                help="path to pre-trained smile detector CNN")
 ap.add_argument("-v", "--video",
-    help = "path to the (optional) video file")
+                help="path to the (optional) video file")
 args = vars(ap.parse_args())
 
 # load the face detector cascade and smile detector CNN
@@ -40,14 +40,14 @@ while True:
 
     # reszie the frame, convert it to grayscale, then clone the
     # original frame so we can draw on it later in the program
-    frame = imutils.resize(frame, width = 300)
+    frame = imutils.resize(frame, width=300)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     frameClone = frame.copy()
 
     # detect faces in the input frame, then clone the frame so
     # that we can draw on it
-    rects = detector.detectMultiScale(gray, scaleFactor = 1.1, minNeighbors = 5,
-        minSize = (30, 30), flags = cv2.CASCADE_SCALE_IMAGE)
+    rects = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5,
+                                      minSize=(30, 30), flags=cv2.CASCADE_SCALE_IMAGE)
 
     for (fX, fY, fW, fH) in rects:
         # extract the ROI of the face from the grayscale image,
@@ -57,18 +57,19 @@ while True:
         roi = cv2.resize(roi, (28, 28))
         roi = roi.astype("float") / 255.0
         roi = img_to_array(roi)
-        roi = np.expand_dims(roi, axis = 0)
+        roi = np.expand_dims(roi, axis=0)
 
         # determine the probabilities of both "smiling" and "not similing"
         # then set the label accordingly
         (notSmiling, smiling) = model.predict(roi)[0]
         label = "Smiling" if smiling > notSmiling else "Not Smiling"
+        print(model.predict(roi))
 
         # display the label and bounding box rectangle on the output frame
         cv2.putText(frameClone, label, (fX, fY - 10),
-            cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.45, (0, 0, 255), 2)
         cv2.rectangle(frameClone, (fX, fY), (fX + fW, fY + fH),
-            (0, 0, 255), 2)
+                      (0, 0, 255), 2)
 
     # show our detected faces along with smiling/not smiling labels
     cv2.imshow("Face", frameClone)

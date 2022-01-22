@@ -27,8 +27,8 @@ The dataset, named SMILES, comes from Daniel Hromada (check [reference](https://
 [image8]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/7.jpg
 [image9]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/8.jpg
 [image10]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/9.jpg
-[training-plot]: ./output/training_loss_and_accuracy_plot.png
-[evaluation]: ./output/evaluation.png
+[training-plot]: node_modules/output/training_loss_and_accuracy_plot.png
+[evaluation]: node_modules/output/evaluation.png
 
 The Figure 1 shows some examples of smiling image, and Figure 2 shows some example of not smiling image.
 
