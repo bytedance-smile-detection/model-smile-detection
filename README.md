@@ -14,7 +14,7 @@
 
 数据集中有 13,165 张图像，其中每张图像的尺寸为 64x64x1（灰度）。并且数据集中的图像在面部周围被紧密裁剪
 
-![Untitled](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/Untitled.png>)
+![数据集](https://cdn.jsdelivr.net/gh/xcm1115/myPictures/mdImg/Untitled.png)
 
 [GitHub - hromi/SMILEsmileD: open source smile detector haarcascade and associated positive & negative image datasets](https://github.com/hromi/SMILEsmileD)
 
@@ -40,11 +40,11 @@ LeNet 的体系结构如下表所示。激活层没有在表中显示，它应�
 
 下图为训练集和验证集的损失和准确度图。从图中我们可以看出，第 6 个 epoch 之后的验证损失开始停滞。超过第 15 个时期的进一步训练可能会导致过度拟合
 
-![training_loss_and_accuracy_plot.png](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/training_loss_and_accuracy_plot.png>)
+![training_loss_and_accuracy_plot.png](https://cdn.jsdelivr.net/gh/xcm1115/myPictures/mdImg/training_loss_and_accuracy_plot.png)
 
 下图说明了对该神经网络的评估，它在验证集上获得了大约 92% 的分类准确率
 
-![evaluation.png](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/evaluation.png>)
+![evaluation.png](https://cdn.jsdelivr.net/gh/xcm1115/myPictures/mdImg/evaluation.png)
 
 # The Problems
 
@@ -52,7 +52,7 @@ LeNet 的体系结构如下表所示。激活层没有在表中显示，它应�
 
 在试图运行 train_model.py 的时候，发现控制台报错，具体如下
 
-![Untitled](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/Untitled%201.png>)
+![Untitled](<https://cdn.jsdelivr.net/gh/xcm1115/myPictures/mdImg/Untitled%20(1).png>)
 
 在 stackoverflow 上找到了解决办法，修改代码如下
 
@@ -69,7 +69,7 @@ classWeight = {i: weight[i] for i in range(len(weight))}
 
 报错如下，应该是 keras 版本问题
 
-![Untitled](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/Untitled%202.png>)
+![Untitled](<https://cdn.jsdelivr.net/gh/xcm1115/myPictures/mdImg/Untitled%20(2).png>)
 
 用 accuracy 替换 acc，val\__accuracy 替换 val_\_acc 即可
 
