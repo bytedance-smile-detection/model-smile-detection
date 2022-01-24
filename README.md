@@ -1,6 +1,6 @@
 # The Lenet model
 
-# **Language / Packages used**
+## **Language / Packages used**
 
 1. python 3.5
 2. OpenCV 3.4.4
@@ -8,7 +8,7 @@
 4. Imutils
 5. NumPy
 
-# Dataset
+## Dataset
 
 使用的数据集为 **SMILES**
 
@@ -18,7 +18,7 @@
 
 [GitHub - hromi/SMILEsmileD: open source smile detector haarcascade and associated positive & negative image datasets](https://github.com/hromi/SMILEsmileD)
 
-# Model
+## Model
 
 该项目使用的模型为 **Lenet 架构**
 
@@ -36,7 +36,7 @@ LeNet 的体系结构如下表所示。激活层没有在表中显示，它应�
 | FC          | 500          |                      |
 | softmax     | 2            |                      |
 
-# Training result
+## Training result
 
 下图为训练集和验证集的损失和准确度图。从图中我们可以看出，第 6 个 epoch 之后的验证损失开始停滞。超过第 15 个时期的进一步训练可能会导致过度拟合
 
@@ -46,9 +46,9 @@ LeNet 的体系结构如下表所示。激活层没有在表中显示，它应�
 
 ![evaluation.png](https://cdn.jsdelivr.net/gh/xcm1115/myPictures/mdImg/evaluation.png)
 
-# The Problems
+## The Problems
 
-## problem 1
+### problem 1
 
 在试图运行 train_model.py 的时候，发现控制台报错，具体如下
 
@@ -65,7 +65,7 @@ classWeight = {i: weight[i] for i in range(len(weight))}
 
 [on colab - class_weight is causing a ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()](https://stackoverflow.com/questions/61261907/on-colab-class-weight-is-causing-a-valueerror-the-truth-value-of-an-array-wit)
 
-## problem 2
+### problem 2
 
 报错如下，应该是 keras 版本问题
 
@@ -78,7 +78,7 @@ plt.plot(np.arange(0, 15), H.history["accuracy"], label="acc")
 plt.plot(np.arange(0, 15), H.history["val_accuracy"], label="val_acc")
 ```
 
-# Convert model
+## Convert model
 
 按照官方文档说明，在 tran_model.py 中加入如下代码即可
 
@@ -86,7 +86,7 @@ plt.plot(np.arange(0, 15), H.history["val_accuracy"], label="val_acc")
 tfjs.converters.save_keras_model(model, './output')
 ```
 
-# Run command
+## Run command
 
 ```python
 # train_model.py
@@ -99,6 +99,6 @@ python detect_smile.py -c="./haarcascade_frontalface_default.xml" -m="./output/l
 node server/app.js
 ```
 
-# Github link
+## Github link
 
 [https://github.com/meng1994412/Smile_Detection](https://github.com/meng1994412/Smile_Detection)
