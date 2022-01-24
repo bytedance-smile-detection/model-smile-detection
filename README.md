@@ -97,9 +97,6 @@ python detect_smile.py -c="./haarcascade_frontalface_default.xml" -m="./output/l
 
 # ./server/app.js
 node server/app.js
-
-# ./tfjs/model.js
-node tfjs/model.js
 ```
 
 # Github link
