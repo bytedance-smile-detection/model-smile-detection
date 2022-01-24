@@ -1,4 +1,4 @@
-# The Lenet model
+# The Lenet Model
 
 ## **Language / Packages used**
 
