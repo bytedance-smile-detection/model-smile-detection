@@ -1,84 +1,107 @@
-# Smile Detection
-## Project Objectives
-Implement a convolutional neural network capable of detecting a person smiling or not:
-* Constructed LeNet architecture from scratch.
-* Trained a model on a dataset of images that contain faces of people who are smiling or not smiling.
-* Developed a script to detect smile in real-time.
+# The Lenet model
 
-## Language / Packages Used
-* Python 3.5
-* [OpenCV](https://docs.opencv.org/3.4.4/) 3.4.4
-* [keras](https://keras.io/) 2.2.4
-* [Imutils](https://github.com/jrosebr1/imutils)
-* [NumPy](http://www.numpy.org/)
+# **Language / Packages used**
 
-## Approaches
-The dataset, named SMILES, comes from Daniel Hromada (check [reference](https://github.com/hromi/SMILEsmileD)). There are 13,165 images in the dataset, where each image has a dimension of 64x64x1 (grayscale). And the images in the dataset are tightly cropped around the face.
+1. python 3.5
+2. OpenCV 3.4.4
+3. keras 2.2.4
+4. Imutils
+5. NumPy
 
-[//]: # (Image References)
+# Dataset
 
-[image1]: ./dataset/SMILEsmileD/SMILEs/positives/positives7/3.jpg
-[image2]: ./dataset/SMILEsmileD/SMILEs/positives/positives7/6.jpg
-[image3]: ./dataset/SMILEsmileD/SMILEs/positives/positives7/13.jpg
-[image4]: ./dataset/SMILEsmileD/SMILEs/positives/positives7/15.jpg
-[image5]: ./dataset/SMILEsmileD/SMILEs/positives/positives7/16.jpg
-[image6]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/4.jpg
-[image7]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/5.jpg
-[image8]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/7.jpg
-[image9]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/8.jpg
-[image10]: ./dataset/SMILEsmileD/SMILEs/negatives/negatives7/9.jpg
-[training-plot]: node_modules/output/training_loss_and_accuracy_plot.png
-[evaluation]: node_modules/output/evaluation.png
+使用的数据集为 **SMILES**
 
-The Figure 1 shows some examples of smiling image, and Figure 2 shows some example of not smiling image.
+数据集中有 13,165 张图像，其中每张图像的尺寸为 64x64x1（灰度）。并且数据集中的图像在面部周围被紧密裁剪
 
-![alt text][image1]
-![alt text][image2]
-![alt text][image3]
-![alt text][image4]
-![alt text][image5]
+![Untitled](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/Untitled.png>)
 
-Figure 1: Positive example of the dataset (smiling).
+[GitHub - hromi/SMILEsmileD: open source smile detector haarcascade and associated positive & negative image datasets](https://github.com/hromi/SMILEsmileD)
 
-![alt text][image6]
-![alt text][image7]
-![alt text][image8]
-![alt text][image9]
-![alt text][image10]
+# Model
 
-Figure 2: Negative example of the dataset (not smiling).
+该项目使用的模型为 **Lenet 架构**
 
-## Results
-### Build the LeNet architecture from scratch
-The LeNet architecture can be found in `lenet.py` inside `pipeline/nn/conv/` directory. The input to the model includes dimensions of the image (height, width, the depth), and number of classes. In this project, the input would be (width = 28, height = 28, depth = 1, classes = 2).
+/pipeline/nn/conv/lenet.py
 
-Table 1 demonstrates the architecture of LeNet. The activation layer is not shown in the table, which should be one after each `CONV` layer. The `ReLU` activation function is used in the project.
+LeNet 的体系结构如下表所示。激活层没有在表中显示，它应该是每一层之后的一个。这个项目使用了激活函数
 
-| Layer Type    | Output Size   | Filter Size / Stride  |
-| ------------- |:-------------:| ---------------------:|
-| Input Image   | 28 x 28 x 1   |                       |
-| CONV          | 28 x 28 x 20  | 5 x 5, K = 20         |
-| POOL          | 14 x 14 x 20  | 2 x 2                 |
-| CONV          | 14 x 14 x 50  | 3 x 3, K = 50         |
-| POOL          | 7 x 7 x 50    | 2 x 2                 |
-| FC            | 500           |                       |
-| softmax       | 2             |                       |
+| Layer Type  | Output Size  | Filter Size / Stride |
+| ----------- | ------------ | -------------------- |
+| Input Image | 28 x 28 x 1  |                      |
+| CONV        | 28 x 28 x 20 | 5 x 5, K = 20        |
+| POOL        | 14 x 14 x 20 | 2 x 2                |
+| CONV        | 14 x 14 x 50 | 3 x 3, K = 50        |
+| POOL        | 7 x 7 x 50   | 2 x 2                |
+| FC          | 500          |                      |
+| softmax     | 2            |                      |
 
-Table 1: Summary of the LeNet architecture.
+# Training result
 
-### Train the Smile CNN
-The `train_model.py` is used for the training process. The weighted model will be saved after training ([chere here](https://github.com/meng1994412/Smile_Detection/blob/master/output/lenet.hdf5)).The saved model can be used for detecting smile in real-time later.
+下图为训练集和验证集的损失和准确度图。从图中我们可以看出，第 6 个 epoch 之后的验证损失开始停滞。超过第 15 个时期的进一步训练可能会导致过度拟合
 
-Figure 3 shows the plot of loss and accuracy for the training and validation set. As we can see from the figure, validation loss past 6th epoch starts to stagnate. Further training past 15th epoch may result in overfitting. Implement data augmentation on training set would be a good future "next-step" plan.
+![training_loss_and_accuracy_plot.png](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/training_loss_and_accuracy_plot.png>)
 
-![alt text][training-plot]
+下图说明了对该神经网络的评估，它在验证集上获得了大约 92% 的分类准确率
 
-Figure 3: Plot of loss and accuracy for the training and validation set.
+![evaluation.png](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/evaluation.png>)
 
-Figure 4 illustrates the evaluation of the network, which obtains about 92% classification accuracy on validation set.
+# The Problems
 
-![alt text][evaluation]
+## problem 1
 
-Figure 4: Evaluation of the network.
+在试图运行 train_model.py 的时候，发现控制台报错，具体如下
 
-### Run the Smile CNN in real-time
+![Untitled](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/Untitled%201.png>)
+
+在 stackoverflow 上找到了解决办法，修改代码如下
+
+```python
+# account for skew in the labeled data
+classTotals = labels.sum(axis=0)
+weight = classTotals / classTotals.max()
+classWeight = {i: weight[i] for i in range(len(weight))}
+```
+
+[on colab - class_weight is causing a ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all()](https://stackoverflow.com/questions/61261907/on-colab-class-weight-is-causing-a-valueerror-the-truth-value-of-an-array-wit)
+
+## problem 2
+
+报错如下，应该是 keras 版本问题
+
+![Untitled](<The%20selected%20model%20(temporary)%2004d8f369a97e40af8cda015f62195017/Untitled%202.png>)
+
+用 accuracy 替换 acc，val\__accuracy 替换 val_\_acc 即可
+
+```python
+plt.plot(np.arange(0, 15), H.history["accuracy"], label="acc")
+plt.plot(np.arange(0, 15), H.history["val_accuracy"], label="val_acc")
+```
+
+# Convert model
+
+按照官方文档说明，在 tran_model.py 中加入如下代码即可
+
+```python
+tfjs.converters.save_keras_model(model, './output')
+```
+
+# Run command
+
+```python
+# train_model.py
+python train_model.py -d="./dataset" -m="./output/" -p="./output"
+
+# detect_smile.py
+python detect_smile.py -c="./haarcascade_frontalface_default.xml" -m="./output/lenet.hdf5"
+
+# ./server/app.js
+node server/app.js
+
+# ./tfjs/model.js
+node tfjs/model.js
+```
+
+# Github link
+
+[https://github.com/meng1994412/Smile_Detection](https://github.com/meng1994412/Smile_Detection)
