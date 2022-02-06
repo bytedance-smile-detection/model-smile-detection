@@ -76,7 +76,7 @@ print(classification_report(testY.argmax(axis=1),
 
 # save the model to disk
 model.save(args["model"])
-tfjs.converters.save_keras_model(model, 'node_modules/models/lenet')
+tfjs.converters.save_keras_model(model, args["model"])
 
 # plot the training + testing loss and accuracy
 plt.style.use("ggplot")

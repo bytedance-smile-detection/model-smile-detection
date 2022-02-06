@@ -90,10 +90,10 @@ tfjs.converters.save_keras_model(model, './output')
 
 ```python
 # train_model.py
-python train_model.py -d="./dataset" -m="./output/" -p="./output"
+python train_model.py -d="./dataset" -m="./models/lenet" -p="./models/lenet/lenet"
 
 # detect_smile.py
-python detect_smile.py -c="./haarcascade_frontalface_default.xml" -m="./output/lenet.hdf5"
+python detect_smile.py -c="./haarcascade_frontalface_default.xml" -m="./models/lenet/lenet.hdf5"
 
 # ./server/app.js
 node server/app.js
